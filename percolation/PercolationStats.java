@@ -57,7 +57,6 @@ public class PercolationStats {
     StdOut.printf(format, "mean", Double.toString(percStats.mean()));
     StdOut.printf(format, "stddev", Double.toString(percStats.stddev()));
     StdOut.printf(format, "95% confidence interval",
-        Double.toString(percStats.confidenceLo()) + ", " 
-        + Double.toString(percStats.confidenceHi()));
+        Double.toString(percStats.confidenceLo()) + ", " + Double.toString(percStats.confidenceHi()));
   }
 }
