@@ -46,9 +46,7 @@ public class Percolation {
       if (grid[row][column] == 1) {
         ufTree.union(ufNode, getTreeIndex(row, column));
       }
-    } catch (IndexOutOfBoundsException e) {
-    }
-    ;
+    } catch (IndexOutOfBoundsException e) {}
   }
 
   public boolean isOpen(int i, int j) {
