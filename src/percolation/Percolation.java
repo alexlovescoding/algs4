@@ -1,5 +1,3 @@
-package percolation;
-
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
@@ -22,6 +20,7 @@ public class Percolation {
     bottomNode = (size * size) + 1;
     for (int i = 0; i <= size; i++) {
       ufTree.union(topNode, i);
+      ufTree.union(bottomNode, bottomNode - i);
     }
   }
 
@@ -38,9 +37,6 @@ public class Percolation {
     connect(ufNode, row + 1, column);
     connect(ufNode, row, column - 1);
     connect(ufNode, row, column + 1);
-    if (row == size-1 && isFull(i,j)) {
-      ufTree.union(bottomNode, ufNode);
-    }
   }
 
   private void connect(int ufNode, int row, int column) {
@@ -48,7 +44,9 @@ public class Percolation {
       if (grid[row][column] == 1) {
         ufTree.union(ufNode, getTreeIndex(row, column));
       }
-    } catch (IndexOutOfBoundsException e) {}
+    } catch (IndexOutOfBoundsException e) {
+      return;
+    }
   }
 
   public boolean isOpen(int i, int j) {
