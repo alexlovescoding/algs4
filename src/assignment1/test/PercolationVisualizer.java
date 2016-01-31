@@ -16,13 +16,13 @@
  *
  ******************************************************************************/
 
-package percolationtest;
+package assignment1.test;
 
 import java.awt.Font;
 
+import assignment1.Percolation;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
-import percolation.Percolation;
 
 public class PercolationVisualizer {
 

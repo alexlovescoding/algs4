@@ -11,11 +11,11 @@
  *
  ******************************************************************************/
 
-package percolationtest;
+package assignment1.test;
 
+import assignment1.Percolation;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
-import percolation.Percolation;
 
 public class InteractivePercolationVisualizer {
 
