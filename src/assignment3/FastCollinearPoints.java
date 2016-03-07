@@ -9,39 +9,31 @@ public class FastCollinearPoints {
 
     public FastCollinearPoints(Point[] points) {
         ArrayList<LineSegment> lineSegments = new ArrayList<LineSegment>();
-        Point[] tempPoints = points;
+        Point[] tempPoints = points.clone();
 
-        outer: for(int i = 0; i < points.length; i++) {
+        outer: for (int i = 0; i < points.length; i++) {
             Arrays.sort(tempPoints, points[i].slopeOrder());
-            for(int j = 0; j < tempPoints.length; j++) {
-                boolean check = false;
+            for (int j = 0; j < tempPoints.length; j++) {
                 try {
                     double firstSlope = points[i].slopeTo(tempPoints[j]);
-                    if(firstSlope == points[i].slopeTo(tempPoints[j+1]) 
-                            && firstSlope == points[i].slopeTo(tempPoints[j+2])) {
-                        check = true;
-                        if(firstSlope != points[i].slopeTo(tempPoints[j+3])) {
-                            Point[] myPoints = { points[i], tempPoints[j], tempPoints[j+1], tempPoints[j+2] };
-                            Point min = Collections.min(Arrays.asList(myPoints));
-                            Point max = Collections.max(Arrays.asList(myPoints));
-                            LineSegment lineSegment = new LineSegment(min, max);
-                            if (!lineSegments.contains(lineSegment)) {
-                                lineSegments.add(lineSegment);
-                            }
+                    ArrayList<Point> myPoints = new ArrayList<Point>();
+                    myPoints.add(points[i]);
+                    myPoints.add(tempPoints[j]);
+                    int count = 0;
+                    while (firstSlope == points[i].slopeTo(tempPoints[j + ++count])) {
+                        myPoints.add(tempPoints[j + count]);
+                    }
+                    if(myPoints.size() == 4) {
+                        Point min = Collections.min(myPoints);
+                        Point max = Collections.max(myPoints);
+                        LineSegment lineSegment = new LineSegment(min, max);
+                        LineSegment reverse = new LineSegment(max, min);
+                        if (!lineSegments.contains(lineSegment) && !lineSegments.contains(reverse)) {
+                            lineSegments.add(lineSegment);
                         }
                         continue outer;
                     }
-                }
-                catch(IndexOutOfBoundsException e) {
-                    if(check) {
-                        Point[] myPoints = { points[i], tempPoints[j], tempPoints[j+1], tempPoints[j+2] };
-                        Point min = Collections.min(Arrays.asList(myPoints));
-                        Point max = Collections.max(Arrays.asList(myPoints));
-                        LineSegment lineSegment = new LineSegment(min, max);
-                        if (!lineSegments.contains(lineSegment)) {
-                            lineSegments.add(lineSegment);
-                        }
-                    }
+                } catch (IndexOutOfBoundsException e) {
                     continue outer;
                 }
             }
@@ -54,6 +46,7 @@ public class FastCollinearPoints {
     public int numberOfSegments() {
         return lineSegments.length;
     }
+
     public LineSegment[] segments() {
         return lineSegments;
     }
