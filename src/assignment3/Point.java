@@ -69,10 +69,10 @@ public class Point implements Comparable<Point> {
             return Double.NEGATIVE_INFINITY;
         }
         else if (this.x == that.x) {
-            return 0.0;
+            return Double.POSITIVE_INFINITY;
         }
         else if (this.y == that.y) {
-            return Double.POSITIVE_INFINITY;
+            return 0.0;
         }
         else {
             return (((double) this.y) - that.y)/(this.x - that.x);
