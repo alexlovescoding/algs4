@@ -23,7 +23,7 @@ public class FastCollinearPoints {
                     while (firstSlope == points[i].slopeTo(tempPoints[j + ++count])) {
                         myPoints.add(tempPoints[j + count]);
                     }
-                    if(myPoints.size() == 4) {
+                    if (myPoints.size() == 4) {
                         Point min = Collections.min(myPoints);
                         Point max = Collections.max(myPoints);
                         LineSegment lineSegment = new LineSegment(min, max);
