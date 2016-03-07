@@ -118,7 +118,7 @@ public class Point implements Comparable<Point> {
                 return (new Double(mPoint.slopeTo(o1)))
                         .compareTo(new Double(mPoint.slopeTo(o2)));
             }
-            
+
         }; 
     }
 
