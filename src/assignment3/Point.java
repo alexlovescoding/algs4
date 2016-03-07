@@ -11,7 +11,11 @@ package assignment3;
  ******************************************************************************/
 
 import java.util.Comparator;
+
+import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 
 public class Point implements Comparable<Point> {
 
@@ -61,7 +65,10 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        if(this.x == that.x) {
+        if(this.x == that.x && this.y == that.y) {
+            return Double.NEGATIVE_INFINITY;
+        }
+        else if(this.x == that.x) {
             return 0.0;
         }
         else if(this.y == that.y) {
@@ -132,6 +139,31 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+
+        // read the N points from a file
+        In in = new In(StdIn.readLine());
+        int N = in.readInt();
+        Point[] points = new Point[N];
+        for (int i = 0; i < N; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+            points[i] = new Point(x, y);
+        }
+
+        // draw the points
+        StdDraw.show(0);
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+        for (Point p : points) {
+            p.draw();
+        }
+        StdDraw.show();
+
+        // print and draw the line segments
+        FastCollinearPoints collinear = new FastCollinearPoints(points);
+        for (LineSegment segment : collinear.segments()) {
+            StdOut.println(segment);
+            segment.draw();
+        }
     }
 }
