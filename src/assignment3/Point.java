@@ -115,6 +115,15 @@ public class Point implements Comparable<Point> {
 
             @Override
             public int compare(Point o1, Point o2) {
+                if (mPoint.slopeTo(o1) == Double.POSITIVE_INFINITY && mPoint.slopeTo(o2) == Double.POSITIVE_INFINITY) {
+                    return 0;
+                }
+                else if (mPoint.slopeTo(o1) != Double.POSITIVE_INFINITY && mPoint.slopeTo(o2) == Double.POSITIVE_INFINITY) {
+                    return 1;
+                }
+                else if (mPoint.slopeTo(o2) != Double.POSITIVE_INFINITY && mPoint.slopeTo(o1) == Double.POSITIVE_INFINITY) {
+                    return -1;
+                }
                 return (new Double(mPoint.slopeTo(o1)))
                         .compareTo(new Double(mPoint.slopeTo(o2)));
             }
