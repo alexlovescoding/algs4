@@ -8,7 +8,7 @@ public class FastCollinearPoints {
     private LineSegment[] lineSegments;
 
     public FastCollinearPoints(Point[] points) {
-        ArrayList<LineSegment> lineSegments = new ArrayList<LineSegment>();
+        ArrayList<LineSegment> lineSegmentsList = new ArrayList<LineSegment>();
         Point[] tempPoints = points.clone();
 
         outer: for (int i = 0; i < points.length; i++) {
@@ -28,8 +28,8 @@ public class FastCollinearPoints {
                         Point max = Collections.max(myPoints);
                         LineSegment lineSegment = new LineSegment(min, max);
                         LineSegment reverse = new LineSegment(max, min);
-                        if (!lineSegments.contains(lineSegment) && !lineSegments.contains(reverse)) {
-                            lineSegments.add(lineSegment);
+                        if (!lineSegmentsList.contains(lineSegment) && !lineSegmentsList.contains(reverse)) {
+                            lineSegmentsList.add(lineSegment);
                         }
                         continue outer;
                     }
@@ -39,8 +39,8 @@ public class FastCollinearPoints {
             }
         }
 
-        this.lineSegments = new LineSegment[lineSegments.size()];
-        lineSegments.toArray(this.lineSegments);
+        this.lineSegments = new LineSegment[lineSegmentsList.size()];
+        lineSegmentsList.toArray(this.lineSegments);
     }
 
     public int numberOfSegments() {

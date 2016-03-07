@@ -9,7 +9,7 @@ public class BruteCollinearPoints {
     private LineSegment[] lineSegments;
 
     public BruteCollinearPoints(Point[] points) {
-        ArrayList<LineSegment >lineSegments = new ArrayList<LineSegment>();
+        ArrayList<LineSegment> lineSegmentsList = new ArrayList<LineSegment>();
         if (points == null) {
             throw new java.lang.NullPointerException("Null points array");
         }
@@ -34,16 +34,16 @@ public class BruteCollinearPoints {
                             Point min = Collections.min(Arrays.asList(tempPoints));
                             Point max = Collections.max(Arrays.asList(tempPoints));
                             LineSegment lineSegment = new LineSegment(min, max);
-                            if (!lineSegments.contains(lineSegment)) {
-                                lineSegments.add(lineSegment);
+                            if (!lineSegmentsList.contains(lineSegment)) {
+                                lineSegmentsList.add(lineSegment);
                             }
                         }
                     }
                 }
             }
         }
-        this.lineSegments = new LineSegment[lineSegments.size()];
-        lineSegments.toArray(this.lineSegments);
+        this.lineSegments = new LineSegment[lineSegmentsList.size()];
+        lineSegmentsList.toArray(this.lineSegments);
     }
 
     public int numberOfSegments() {
